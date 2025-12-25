@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杜拜住宅市場報告 2025年第三季度 | Meaven Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        meaven: '#009144',
+                        teal: '#20C997',
+                        dark: '#1a1a1a',
+                        secondary: '#666666',
+                        mustard: '#D4A574',
+                        deepblue: '#1A365D',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --meaven: #009144;
+            --teal: #20C997;
+            --dark: #1a1a1a;
+            --secondary: #666666;
+            --mustard: #D4A574;
+            --deepblue: #1A365D;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FFFFFF;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* 響應式字體 */
+        @media (min-width: 768px) { html { font-size: 17px; } }
+        @media (min-width: 1024px) { html { font-size: 18px; } }
+        
+        /* Hero 背景動畫 */
+        .aurora-bg {
+            position: absolute;
+            width: 200%; height: 200%;
+            top: -50%; left: -50%;
+            background: conic-gradient(from 120deg at 50% 50%, 
+                rgba(0, 145, 68, 0.35) 0%, 
+                rgba(32, 201, 151, 0.25) 25%,
+                rgba(212, 165, 116, 0.15) 50%,
+                rgba(26, 54, 93, 0.25) 75%,
+                rgba(0, 145, 68, 0.35) 100%);
+            filter: blur(100px);
+            animation: aurora-rotate 25s linear infinite;
+        }
+        @keyframes aurora-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        /* KPI 數字樣式 */
+        .kpi-hero {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--meaven) 0%, var(--teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .kpi-large {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .kpi-medium {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        /* Section 容器 */
+        .section-container {
+            padding: 5rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .section-container { padding: 6rem 2rem; }
+        }
+        
+        .section-full {
+            padding: 5rem 0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(180deg, rgba(0, 145, 68, 0.04) 0%, rgba(32, 201, 151, 0.02) 100%);
+        }
+        
+        /* 卡片樣式 */
+        .card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 145, 68, 0.1);
+        }
+        
+        .card-highlight {
+            background: white;
+            border: 2px solid var(--meaven);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 145, 68, 0.12);
+        }
+        
+        /* 圖表容器 */
+        .chart-box {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 400px;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+        
+        /* 進度條 */
+        .progress-bar {
+            height: 10px;
+            background: rgba(0, 145, 68, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--meaven) 0%, var(--teal) 100%);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+        
+        /* 導航欄 */
+        .nav-sticky {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+        }
+        .nav-sticky.visible { transform: translateY(0); }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--meaven) 0%, var(--teal) 100%);
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+        
+        /* 表格樣式 */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.95rem;
+        }
+        .data-table th {
+            background: linear-gradient(135deg, var(--meaven) 0%, var(--teal) 100%);
+            color: white;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .data-table th:first-child { border-radius: 0.75rem 0 0 0; }
+        .data-table th:last-child { border-radius: 0 0.75rem 0 0; }
+        .data-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(0, 145, 68, 0.08);
+            vertical-align: middle;
+        }
+        .data-table tr:hover td { background: rgba(0, 145, 68, 0.03); }
+        .data-table tr:last-child td:first-child { border-radius: 0 0 0 0.75rem; }
+        .data-table tr:last-child td:last-child { border-radius: 0 0 0.75rem 0; }
+        
+        /* 標籤樣式 */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .badge-up {
+            background: rgba(0, 145, 68, 0.12);
+            color: var(--meaven);
+        }
+        .badge-down {
+            background: rgba(220, 53, 69, 0.12);
+            color: #dc3545;
+        }
+        
+        /* 台幣換算標籤 */
+        .tw-tag {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .cn-tag {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #E53935, #FF5722);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* 圖標圓圈 */
+        .icon-box {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--meaven) 0%, var(--teal) 100%);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        /* 分隔線 */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 145, 68, 0.2) 50%, transparent 100%);
+            margin: 4rem 0;
+        }
+        
+        /* 術語 Tooltip */
+        .term-tip {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            cursor: help;
+            border-bottom: 1px dashed var(--teal);
+        }
+        .term-tip .tip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px; height: 18px;
+            background: var(--teal);
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+        .term-tip .tip-content {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            width: 300px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .term-tip .tip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--dark);
+        }
+        .term-tip:hover .tip-content {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 區域 Tooltip */
+        .area-tip {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .area-tip .area-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px; height: 20px;
+            background: var(--deepblue);
+            color: white;
+            border-radius: 50%;
+            font-size: 10px;
+            margin-left: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .area-tip .area-icon:hover { background: var(--mustard); transform: scale(1.1); }
+        .area-tip .area-content {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--dark);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            width: 320px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,145,68,0.1);
+        }
+        .area-tip .area-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: white;
+        }
+        .area-tip:hover .area-content { opacity: 1; visibility: visible; }
+        .area-title { font-weight: 700; color: var(--meaven); margin-bottom: 0.5rem; font-size: 1rem; }
+        .area-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+        .area-tag {
+            background: rgba(0,145,68,0.1);
+            color: var(--meaven);
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        /* 解讀區塊 */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(26, 54, 93, 0.06) 0%, rgba(32, 201, 151, 0.03) 100%);
+            border: 1px dashed rgba(26, 54, 93, 0.25);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .insight-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            color: var(--deepblue);
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+        .insight-content {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        /* 亮點區塊 */
+        .highlight-banner {
+            background: linear-gradient(135deg, var(--meaven) 0%, var(--teal) 100%);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            color: white;
+        }
+        .highlight-banner h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .highlight-banner li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .highlight-banner li i {
+            margin-top: 0.3rem;
+            opacity: 0.8;
+        }
+        
+        /* 響應式調整 */
+        @media (max-width: 768px) {
+            .term-tip .tip-content,
+            .area-tip .area-content {
+                width: 260px;
+                left: 0;
+                transform: translateX(0);
+            }
+            .area-tip .area-content::after,
+            .term-tip .tip-content::after {
+                left: 20px;
+            }
+        }
+        
+        /* 滾動條 */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f5f5f5; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--meaven), var(--teal));
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 滾動進度條 -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- 固定導航 -->
+    <nav class="nav-sticky" id="stickyNav">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <span class="text-xl font-bold text-meaven">Meaven Group</span>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#overview" class="text-secondary hover:text-meaven transition-colors">市場概覽</a>
+                <a href="#performance" class="text-secondary hover:text-meaven transition-colors">價格表現</a>
+                <a href="#demand" class="text-secondary hover:text-meaven transition-colors">需求分析</a>
+                <a href="#supply" class="text-secondary hover:text-meaven transition-colors">供應分析</a>
+                <a href="#prime" class="text-secondary hover:text-meaven transition-colors">高端市場</a>
+                <a href="#outlook" class="text-secondary hover:text-meaven transition-colors">市場展望</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-section" id="hero">
+        <div class="aurora-bg"></div>
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <p class="text-meaven font-semibold tracking-widest mb-4 uppercase">Q3 2025 Special Edition</p>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark mb-4 leading-tight">
+                杜拜住宅市場<br>
+                <span class="text-meaven">深度分析報告</span>
+            </h1>
+            
+            <p class="text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-8">
+                Dubai Residential Market Review &amp; 2026 Forecast
+            </p>
+            
+            <!-- 報告亮點 -->
+            <div class="highlight-banner text-left max-w-4xl mx-auto mb-10">
+                <h3><i class="fas fa-star mr-2"></i>本季報告核心發現</h3>
+                <div class="grid md:grid-cols-2 gap-x-8 gap-y-2">
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check-circle"></i><span>房價連續 <strong>5 年</strong>上漲，年度增長達 <strong>10%</strong></span></li>
+                        <li><i class="fas fa-check-circle"></i><span>2025 前三季交易額 <strong>3,100 億 AED</strong>（約 2.6 兆台幣）</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>千萬美元豪宅成交 <strong>357 筆</strong>，年增 26%</span></li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-check-circle"></i><span>投機交易比例僅 <strong>4.5%</strong>，市場結構更健康</span></li>
+                        <li><i class="fas fa-check-circle"></i><span>2026 預測：主流市場 <strong>+1%</strong>，高端市場 <strong>+3%</strong></span></li>
+                        <li><i class="fas fa-check-circle"></i><span>供應警訊：2030 年前預計交付 <strong>35 萬套</strong>住宅</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 核心 KPI -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div class="card text-center">
+                    <p class="kpi-medium text-meaven">10%</p>
+                    <p class="text-secondary mt-2">年度價格增長</p>
+                    <p class="text-sm text-dark font-medium">Annual Growth</p>
+                </div>
+                <div class="card text-center">
+                    <p class="kpi-medium text-teal">3,100 億</p>
+                    <p class="text-secondary mt-2">交易總額 AED</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 2.6 兆</span>
+                        <span class="cn-tag">RMB 6,200 億</span>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <p class="kpi-medium text-deepblue">14.8 萬</p>
+                    <p class="text-secondary mt-2">交易筆數</p>
+                    <p class="text-sm text-dark font-medium">Transactions</p>
+                </div>
+                <div class="card text-center">
+                    <p class="kpi-medium text-mustard">5 年</p>
+                    <p class="text-secondary mt-2">連續增長</p>
+                    <p class="text-sm text-dark font-medium">Consecutive Years</p>
+                </div>
+            </div>
+            
+            <div class="mt-10">
+                <a href="#overview" class="inline-flex items-center gap-2 text-meaven font-semibold text-lg hover:gap-3 transition-all">
+                    <span>向下滾動探索完整報告</span>
+                    <i class="fas fa-chevron-down animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MARKET OVERVIEW ==================== -->
+    <section class="section-full gradient-bg" id="overview">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Market Backdrop</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">市場結構性轉變</h2>
+                <p class="text-secondary mt-3 text-lg">A Structural Shift in Market Dynamics</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-start">
+                <!-- 左側文字 -->
+                <div>
+                    <div class="space-y-5 text-dark leading-relaxed">
+                        <p class="text-lg">
+                            杜拜住房市場自 2002 年向國際買家開放以來，已經歷兩個完整的市場週期。在當前的第三個週期中，
+                            <span class="term-tip">
+                                投機性過剩
+                                <span class="tip-icon"><i class="fas fa-question"></i></span>
+                                <span class="tip-content">
+                                    <strong>投機性過剩 (Speculative Overhang)</strong><br><br>
+                                    指市場中短期內快速買賣以獲利的交易比例過高。當投機比例高時，市場容易出現泡沫化和劇烈價格波動。
+                                </span>
+                            </span>
+                            明顯低於以往的繁榮期。
+                        </p>
+                        
+                        <p class="text-lg">
+                            購買後一年內轉售的比例今天約為 <strong class="text-meaven text-xl">4%</strong>，
+                            而 2008 年全球金融危機前夕約為 <strong class="text-red-500 text-xl">25%</strong>，
+                            這標誌著向最終用戶和長期投資者的重要結構性轉變。
+                        </p>
+                    </div>
+                    
+                    <!-- 重點數據框 -->
+                    <div class="card-highlight mt-8">
+                        <div class="flex items-center gap-5">
+                            <div class="icon-box">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-meaven">
+                                    4.5% <span class="text-lg font-normal text-secondary">vs 25%</span>
+                                </p>
+                                <p class="text-secondary mt-1">本週期投機交易比例 vs 2008 年金融危機前</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 解讀區塊 -->
+                    <div class="insight-box">
+                        <div class="insight-title">
+                            <i class="fas fa-lightbulb text-yellow-500"></i>
+                            <span>這代表什麼意思？</span>
+                        </div>
+                        <div class="insight-content">
+                            <p><strong>簡單來說：</strong>杜拜房市已經從「炒房為主」轉變為「自住為主」。</p>
+                            <p class="mt-2">過去很多人買房是為了快速轉賣獲利，現在則是真正想住的人或長期投資者在買。這種轉變讓市場更穩定，不容易像 2008 年那樣暴漲暴跌。</p>
+                            <p class="mt-2"><strong>對投資者來說：</strong>短期暴利機會減少，但長期持有的風險也降低了。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側圖表 -->
+                <div>
+                    <div class="chart-box">
+                        <h4 class="font-bold text-dark mb-4 text-lg">杜拜 GDP 增長率 (2011-2024)</h4>
+                        <div class="chart-container" id="gdpChart"></div>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <div class="insight-title">
+                            <i class="fas fa-chart-bar text-teal"></i>
+                            <span>圖表解讀</span>
+                        </div>
+                        <div class="insight-content">
+                            <p>這張圖顯示杜拜的經濟增長率變化。2021 年經濟強勁反彈（5.7%），之後維持穩定增長。</p>
+                            <p class="mt-2"><strong>經濟與房價的關係：</strong>經濟好 → 就業機會多 → 人口流入 → 住房需求增加 → 房價上漲</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三大指標卡片 -->
+            <div class="grid md:grid-cols-3 gap-6 mt-14">
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="icon-box"><i class="fas fa-users"></i></div>
+                        <span class="badge badge-up">+5.8% CAGR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">人口增長驅動需求</h3>
+                    <p class="text-secondary mb-4">Population Growth</p>
+                    <p class="kpi-medium text-meaven">4.02 M</p>
+                    <p class="text-secondary mt-2">2025 年 9 月人口總數</p>
+                    <p class="text-sm text-dark mt-1">2024 年新增居民：<strong>208,800 人</strong></p>
+                    <div class="progress-bar mt-4">
+                        <div class="progress-fill" style="width: 69%;"></div>
+                    </div>
+                    <p class="text-sm text-secondary mt-2">2040 年目標: 5.8M（已完成 69%）</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="icon-box" style="background: linear-gradient(135deg, var(--teal), var(--deepblue));"><i class="fas fa-building"></i></div>
+                        <span class="badge badge-up">8.1% CAGR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">住房供應大幅擴張</h3>
+                    <p class="text-secondary mb-4">Housing Supply</p>
+                    <p class="kpi-medium text-teal">838K 套</p>
+                    <p class="text-secondary mt-2">2023 年住宅存量</p>
+                    <p class="text-sm text-dark mt-1">2005 年僅：<strong>138,000 套</strong></p>
+                    <div class="progress-bar mt-4">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <p class="text-sm text-secondary mt-2">18 年內增長近 5 倍</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="icon-box" style="background: linear-gradient(135deg, var(--deepblue), var(--mustard));"><i class="fas fa-chart-pie"></i></div>
+                        <span class="badge badge-up">多元化</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark mb-2">經濟多元化增強</h3>
+                    <p class="text-secondary mb-4">Economic Diversification</p>
+                    <p class="kpi-medium text-deepblue">63%</p>
+                    <p class="text-secondary mt-2">前五大行業 GDP 佔比</p>
+                    <p class="text-sm text-dark mt-1">2008 年：68% → 依賴度下降</p>
+                    <div class="progress-bar mt-4">
+                        <div class="progress-fill" style="width: 63%; background: linear-gradient(90deg, var(--deepblue), var(--teal));"></div>
+                    </div>
+                    <p class="text-sm text-secondary mt-2">經濟結構更均衡穩定</p>
+                </div>
+            </div>
+            
+            <!-- 區塊總結 -->
+            <div class="insight-box mt-10">
+                <div class="insight-title">
+                    <i class="fas fa-bookmark text-meaven"></i>
+                    <span>本節重點摘要</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>三個關鍵訊號顯示杜拜房市基本面健康：</strong></p>
+                    <div class="grid md:grid-cols-3 gap-4 mt-3">
+                        <div class="bg-white rounded-lg p-4">
+                            <p class="font-bold text-meaven mb-1">1️⃣ 投機減少</p>
+                            <p class="text-sm">短期炒房比例從 25% 降至 4.5%，市場以自住需求為主</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <p class="font-bold text-teal mb-1">2️⃣ 人口持續流入</p>
+                            <p class="text-sm">年均 5.8% 人口增長，真實的住房需求支撐</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <p class="font-bold text-deepblue mb-1">3️⃣ 經濟多元化</p>
+                            <p class="text-sm">不再過度依賴單一產業，抗風險能力提升</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== PERFORMANCE SECTION ==================== -->
+    <section class="section-full" id="performance">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Market Performance</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">住宅市場價格表現</h2>
+                <p class="text-secondary mt-3 text-lg">Q3 2025 價格數據與各區域分析</p>
+            </div>
+            
+            <!-- 公寓與別墅價格對比 -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card-highlight text-center">
+                    <p class="text-meaven font-semibold mb-3">公寓平均價格 Apartment</p>
+                    <p class="kpi-hero">1,798</p>
+                    <p class="text-xl text-dark font-bold mt-2">AED / 平方英尺</p>
+                    <div class="mt-3">
+                        <span class="tw-tag">TWD 53.9 萬/坪</span>
+                        <span class="cn-tag">RMB 3.87 萬/平</span>
+                    </div>
+                    <div class="flex justify-center gap-8 mt-6">
+                        <div>
+                            <p class="text-2xl font-bold text-teal">+69%</p>
+                            <p class="text-secondary">較 Q1 2020</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-meaven">+20%</p>
+                            <p class="text-secondary">較 2014 年峰值</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card text-center" style="border: 2px solid var(--deepblue);">
+                    <p class="text-deepblue font-semibold mb-3">別墅平均價格 Villa</p>
+                    <p class="kpi-hero" style="background: linear-gradient(135deg, var(--deepblue), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">2,250</p>
+                    <p class="text-xl text-dark font-bold mt-2">AED / 平方英尺</p>
+                    <div class="mt-3">
+                        <span class="tw-tag">TWD 67.5 萬/坪</span>
+                        <span class="cn-tag">RMB 4.84 萬/平</span>
+                    </div>
+                    <div class="flex justify-center gap-8 mt-6">
+                        <div>
+                            <p class="text-2xl font-bold text-teal">+124%</p>
+                            <p class="text-secondary">較 Q1 2020</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-deepblue">+55%</p>
+                            <p class="text-secondary">較 2014 年峰值</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 價格解讀 -->
+            <div class="insight-box mb-12">
+                <div class="insight-title">
+                    <i class="fas fa-lightbulb text-yellow-500"></i>
+                    <span>價格表現解讀</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>為什麼別墅漲幅（+124%）遠超公寓（+69%）？</strong></p>
+                    <ul class="mt-3 space-y-2">
+                        <li>• <strong>供應稀缺：</strong>別墅用地有限，新建案少；公寓可以蓋高樓增加供應</li>
+                        <li>• <strong>疫情效應：</strong>COVID-19 後，高淨值人士更偏好獨立空間和私人花園</li>
+                        <li>• <strong>家庭需求：</strong>移居杜拜的家庭增加，學校入學率年增 6%</li>
+                    </ul>
+                    <div class="bg-white rounded-lg p-4 mt-4">
+                        <p><strong>投資者參考：</strong></p>
+                        <p class="mt-1">【台灣】以台北市中心新建案均價約 100 萬/坪計算，杜拜公寓約為台北的 <strong class="text-meaven">54%</strong>，別墅約為 <strong class="text-meaven">68%</strong>。</p>
+                        <p class="mt-1">【大陸】以北京核心區均價約 10-12 萬/平計算，杜拜公寓約為北京的 <strong class="text-meaven">35-40%</strong>，仍具價格優勢。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 價格走勢圖 -->
+            <div class="chart-box mb-12">
+                <h4 class="font-bold text-dark mb-4 text-lg">住宅價格走勢 (2003-2025)</h4>
+                <div class="chart-container" id="priceChart"></div>
+                <p class="text-center text-secondary mt-4">資料來源：REIDIN, Knight Frank Research</p>
+            </div>
+            
+            <!-- 公寓價格表 -->
+            <div class="mb-10">
+                <h3 class="text-2xl font-bold text-dark mb-6">
+                    公寓價格表現
+                    <span class="text-secondary font-normal text-lg ml-2">Q3 2025</span>
+                </h3>
+                <div class="overflow-x-auto rounded-xl shadow-lg">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>社區 Community</th>
+                                <th>均價 (AED/sqft)</th>
+                                <th>TWD 萬/坪</th>
+                                <th>RMB 萬/平</th>
+                                <th>年度變化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Palm Jumeirah 棕櫚島
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🌴 Palm Jumeirah 棕櫚島</div>
+                                            <p>世界最大人工島，棕櫚樹形狀的標誌性地標。匯集頂級酒店（亞特蘭蒂斯）、私人海灘別墅、高端公寓。</p>
+                                            <p class="mt-2">杜拜最頂級的濱海豪宅區，以獨特景觀和奢華生活聞名。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">頂級豪宅區</span>
+                                                <span class="area-tag">人工島</span>
+                                                <span class="area-tag">海景</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">4,147</td>
+                                <td><span class="tw-tag">124.4</span></td>
+                                <td><span class="cn-tag">8.93</span></td>
+                                <td><span class="badge badge-up">+34.0%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Downtown Dubai 市中心
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🏙️ Downtown Dubai 市中心</div>
+                                            <p>杜拜的心臟地帶，哈里發塔（世界最高建築 828m）所在地。擁有 Dubai Mall（全球最大購物中心）、音樂噴泉等地標。</p>
+                                            <p class="mt-2">類似台北信義區，是商業、觀光、居住的核心區域。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">哈里發塔</span>
+                                                <span class="area-tag">Dubai Mall</span>
+                                                <span class="area-tag">核心商圈</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">3,033</td>
+                                <td><span class="tw-tag">91.0</span></td>
+                                <td><span class="cn-tag">6.53</span></td>
+                                <td><span class="badge badge-up">+15.0%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Dubai Marina 碼頭區
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">⛵ Dubai Marina 碼頭區</div>
+                                            <p>人工運河社區，兩岸林立超過 200 棟高樓。擁有 Marina Walk 濱水步道、遊艇碼頭、海灘俱樂部。</p>
+                                            <p class="mt-2">年輕專業人士和外派人員最愛的居住區，夜生活豐富。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">運河景觀</span>
+                                                <span class="area-tag">遊艇碼頭</span>
+                                                <span class="area-tag">夜生活</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">2,779</td>
+                                <td><span class="tw-tag">83.4</span></td>
+                                <td><span class="cn-tag">5.98</span></td>
+                                <td><span class="badge badge-up">+32.4%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Business Bay 商業灣
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">💼 Business Bay 商業灣</div>
+                                            <p>杜拜的「曼哈頓」，沿 Dubai Canal 運河發展的商業區。結合商辦大樓與高端住宅，緊鄰 Downtown。</p>
+                                            <p class="mt-2">近年快速發展，許多新建高端公寓，吸引商務人士居住。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">商業中心</span>
+                                                <span class="area-tag">運河景觀</span>
+                                                <span class="area-tag">快速發展</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">2,586</td>
+                                <td><span class="tw-tag">77.6</span></td>
+                                <td><span class="cn-tag">5.57</span></td>
+                                <td><span class="badge badge-up">+13.4%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Jumeirah Village Circle (JVC)
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🏘️ JVC 朱美拉村圓環</div>
+                                            <p>杜拜中價位住宅區的代表，圓形規劃的大型社區。適合首購族和年輕家庭，交通便利，生活機能完善。</p>
+                                            <p class="mt-2">類似台北新北市重劃區，價格親民但發展潛力大。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">中價位</span>
+                                                <span class="area-tag">首購友善</span>
+                                                <span class="area-tag">高供應量</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">1,482</td>
+                                <td><span class="tw-tag">44.5</span></td>
+                                <td><span class="cn-tag">3.19</span></td>
+                                <td><span class="badge badge-up">+16.1%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 別墅價格表 -->
+            <div class="mb-10">
+                <h3 class="text-2xl font-bold text-dark mb-6">
+                    別墅價格表現
+                    <span class="text-secondary font-normal text-lg ml-2">Q3 2025</span>
+                </h3>
+                <div class="overflow-x-auto rounded-xl shadow-lg">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>社區 Community</th>
+                                <th>均價 (AED/sqft)</th>
+                                <th>TWD 萬/坪</th>
+                                <th>RMB 萬/平</th>
+                                <th>年度變化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Emirates Hills 酋長山
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">👑 Emirates Hills 酋長山</div>
+                                            <p>杜拜的「貝佛利山莊」，最頂級的別墅社區。圍繞 Montgomerie 高爾夫球場，每棟別墅都是獨特設計。</p>
+                                            <p class="mt-2">居民多為皇室成員、企業家和名人，私密性極高，24 小時保安。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">頂級富豪區</span>
+                                                <span class="area-tag">高爾夫景觀</span>
+                                                <span class="area-tag">私密安全</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">6,461</td>
+                                <td><span class="tw-tag">193.8</span></td>
+                                <td><span class="cn-tag">13.90</span></td>
+                                <td><span class="badge badge-up">+33.2%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Palm Jumeirah 棕櫚島
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🌴 Palm Jumeirah 棕櫚島別墅</div>
+                                            <p>棕櫚島「葉片」上的獨棟別墅，擁有私人海灘和船塢。全球富豪爭相購置的頂級物業。</p>
+                                            <p class="mt-2">貝克漢、英國王室成員都曾在此置產。是杜拜房價最高的區域。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">超級豪宅</span>
+                                                <span class="area-tag">私人海灘</span>
+                                                <span class="area-tag">名人聚集</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">6,764</td>
+                                <td><span class="tw-tag">202.9</span></td>
+                                <td><span class="cn-tag">14.56</span></td>
+                                <td><span class="badge badge-up">+5.1%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        La Mer 海之城
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🏖️ La Mer 海之城</div>
+                                            <p>Meraas 開發的海濱生活區，結合住宅、零售、娛樂。擁有私人海灘、水上樂園 Laguna、潮流餐廳酒吧。</p>
+                                            <p class="mt-2">設計風格現代時尚，吸引年輕富裕階層，<strong>近期房價漲幅全市最高</strong>。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">海濱生活</span>
+                                                <span class="area-tag">時尚設計</span>
+                                                <span class="area-tag">漲幅最高</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">4,511</td>
+                                <td><span class="tw-tag">135.3</span></td>
+                                <td><span class="cn-tag">9.71</span></td>
+                                <td><span class="badge badge-up">+54.8%</span></td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold">
+                                    <span class="area-tip">
+                                        Arabian Ranches 阿拉伯牧場
+                                        <span class="area-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                        <span class="area-content">
+                                            <div class="area-title">🏡 Arabian Ranches 阿拉伯牧場</div>
+                                            <p>Emaar 開發的成熟別墅社區，沙漠風格建築設計。擁有高爾夫球場、馬術中心、社區商場。</p>
+                                            <p class="mt-2">是外派家庭最愛的居住區之一，學校和醫療設施完善，社區氛圍濃厚。</p>
+                                            <div class="area-tags">
+                                                <span class="area-tag">成熟社區</span>
+                                                <span class="area-tag">家庭首選</span>
+                                                <span class="area-tag">馬術中心</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="text-lg font-semibold">2,239</td>
+                                <td><span class="tw-tag">67.2</span></td>
+                                <td><span class="cn-tag">4.82</span></td>
+                                <td><span class="badge badge-up">+34.2%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 區塊總結 -->
+            <div class="insight-box">
+                <div class="insight-title">
+                    <i class="fas fa-bookmark text-meaven"></i>
+                    <span>價格表現重點摘要</span>
+                </div>
+                <div class="insight-content">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-dark mb-2">🏆 年度漲幅排行</p>
+                            <ul class="space-y-1">
+                                <li>1. La Mer 海之城 <span class="text-meaven font-bold">+54.8%</span></li>
+                                <li>2. Arabian Ranches <span class="text-meaven font-bold">+34.2%</span></li>
+                                <li>3. Palm Jumeirah 公寓 <span class="text-meaven font-bold">+34.0%</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-bold text-dark mb-2">💡 投資建議</p>
+                            <ul class="space-y-1">
+                                <li>• <strong>首購/收租：</strong>JVC（44.5萬/坪）價格親民</li>
+                                <li>• <strong>資產配置：</strong>Palm Jumeirah 保值性佳</li>
+                                <li>• <strong>潛力區域：</strong>La Mer 漲幅驚人</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== DEMAND SECTION ==================== -->
+    <section class="section-full gradient-bg" id="demand">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Demand Trends</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">需求趨勢分析</h2>
+                <p class="text-secondary mt-3 text-lg">交易量、買家結構與資金來源</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-start mb-12">
+                <!-- 左側數據卡 -->
+                <div>
+                    <div class="card-highlight">
+                        <p class="text-meaven font-semibold mb-4">Q3 2025 創紀錄銷售</p>
+                        <p class="kpi-large text-meaven">56,854 筆</p>
+                        <p class="text-xl font-bold text-dark mt-2">住宅銷售筆數</p>
+                        <p class="text-secondary text-lg mt-3">
+                            較 Q3 2024 增長 <span class="text-meaven font-bold text-xl">+17%</span>
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 mt-8">
+                            <div class="bg-gray-50 rounded-xl p-5">
+                                <p class="kpi-medium text-teal">1,170 億</p>
+                                <p class="text-secondary mt-1">AED Q3 交易總額</p>
+                                <div class="mt-2">
+                                    <span class="tw-tag">TWD 9,850 億</span>
+                                    <span class="cn-tag">RMB 2,340 億</span>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-5">
+                                <p class="kpi-medium text-deepblue">72%</p>
+                                <p class="text-secondary mt-1">
+                                    <span class="term-tip">
+                                        期房銷售
+                                        <span class="tip-icon"><i class="fas fa-question"></i></span>
+                                        <span class="tip-content">
+                                            <strong>期房 (Off-plan)</strong><br><br>
+                                            尚未建成或正在建設中的房產。買家通常支付較低首付（10-20%），按工程進度分期付款。<br><br>
+                                            <strong>優點：</strong>價格較低<br>
+                                            <strong>缺點：</strong>需等待 2-4 年交屋且有完工風險
+                                        </span>
+                                    </span>
+                                    佔比
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <div class="insight-title">
+                            <i class="fas fa-lightbulb text-yellow-500"></i>
+                            <span>為什麼期房佔比這麼高？</span>
+                        </div>
+                        <div class="insight-content">
+                            <p>杜拜期房銷售佔 72% 主要因為：</p>
+                            <ul class="mt-2 space-y-2">
+                                <li>1️⃣ <strong>付款輕鬆：</strong>通常只需 10-20% 首付，餘款按工程進度支付</li>
+                                <li>2️⃣ <strong>價格優勢：</strong>期房價格通常比現房低 10-20%</li>
+                                <li>3️⃣ <strong>投資策略：</strong>可在交屋前轉售，賺取差價</li>
+                            </ul>
+                            <p class="mt-3 text-red-600">⚠️ <strong>風險提醒：</strong>需選擇信譽良好的開發商，注意交屋延遲風險</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側圖表 -->
+                <div>
+                    <div class="chart-box">
+                        <h4 class="font-bold text-dark mb-4 text-lg">歷年交易量與交易額走勢</h4>
+                        <div class="chart-container" id="transactionChart"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三個指標 -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="card">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="icon-box"><i class="fas fa-building"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-dark">期房銷售主導</h3>
+                            <p class="text-secondary">Off-plan Dominance</p>
+                        </div>
+                    </div>
+                    <p class="kpi-medium text-meaven">222,308</p>
+                    <p class="text-secondary mt-2">2023 年以來推出的住宅單位</p>
+                    <p class="text-dark mt-1">涵蓋 <strong>984</strong> 個註冊項目</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="icon-box" style="background: linear-gradient(135deg, var(--teal), var(--deepblue));"><i class="fas fa-money-bill-wave"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-dark">現金交易主導</h3>
+                            <p class="text-secondary">Cash Transactions</p>
+                        </div>
+                    </div>
+                    <p class="kpi-medium text-teal">86%</p>
+                    <p class="text-secondary mt-2">現金支付比例</p>
+                    <p class="text-dark mt-1">顯示買家資金實力強勁</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="icon-box" style="background: linear-gradient(135deg, var(--deepblue), var(--mustard));"><i class="fas fa-landmark"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold text-dark">
+                                <span class="term-tip">
+                                    抵押貸款
+                                    <span class="tip-icon"><i class="fas fa-question"></i></span>
+                                    <span class="tip-content">
+                                        <strong>抵押貸款 (Mortgage)</strong><br><br>
+                                        以房產作為抵押向銀行借款購房。杜拜的貸款條件：<br>
+                                        • 外國人最高可貸 75%（首購）<br>
+                                        • 利率約 4-5%<br>
+                                        • 最長 25 年
+                                    </span>
+                                </span>
+                                激增
+                            </h3>
+                            <p class="text-secondary">Mortgage Activity</p>
+                        </div>
+                    </div>
+                    <p class="kpi-medium text-deepblue">23K+</p>
+                    <p class="text-secondary mt-2">2025 年前 9 個月貸款購房數</p>
+                    <p class="text-dark mt-1">較 4 年前 <strong>翻倍</strong></p>
+                </div>
+            </div>
+            
+            <!-- 開發商圖表 -->
+            <div class="chart-box mb-8">
+                <h4 class="font-bold text-dark mb-4 text-lg">頂級開發商期房銷售份額（Q1-Q3 2025）</h4>
+                <div class="chart-container" id="developerChart" style="height: 350px;"></div>
+            </div>
+            
+            <!-- 開發商解讀 -->
+            <div class="insight-box">
+                <div class="insight-title">
+                    <i class="fas fa-building text-teal"></i>
+                    <span>主要開發商介紹</span>
+                </div>
+                <div class="insight-content">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p><strong class="text-meaven">Emaar (21.4%)</strong></p>
+                            <p>杜拜最大開發商，哈里發塔、Dubai Mall 的建造者，品質有保證</p>
+                        </div>
+                        <div>
+                            <p><strong class="text-teal">Damac (12.1%)</strong></p>
+                            <p>主打奢華品牌合作（Versace、Cavalli），設計感強</p>
+                        </div>
+                        <div>
+                            <p><strong class="text-deepblue">Sobha (6.4%)</strong></p>
+                            <p>印度背景，以高品質建築聞名，自有建築團隊確保工程品質</p>
+                        </div>
+                        <div>
+                            <p><strong class="text-mustard">Nakheel (5.6%)</strong></p>
+                            <p>政府相關企業，棕櫚島的開發者，大型項目為主</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 bg-white rounded-lg p-4">
+                        💡 <strong>選擇建議：</strong>首購建議選擇 Emaar、Sobha 等口碑較好的開發商，降低交屋風險
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== SUPPLY SECTION ==================== -->
+    <section class="section-full" id="supply">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Supply Analysis</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">供需分析</h2>
+                <p class="text-secondary mt-3 text-lg">未來供應預測與潛在風險評估</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-start mb-12">
+                <!-- 左側警示 -->
+                <div>
+                    <div class="card" style="border: 2px solid #dc3545; background: linear-gradient(135deg, rgba(220, 53, 69, 0.05), rgba(255, 193, 7, 0.03));">
+                        <h3 class="text-xl font-bold text-dark mb-4 flex items-center gap-2">
+                            <i class="fas fa-triangle-exclamation text-red-500 text-2xl"></i>
+                            供應過剩風險警示
+                        </h3>
+                        <p class="text-dark text-lg mb-4">
+                            根據已註冊項目，杜拜可能在 2030 年前完成約 <strong class="text-red-500 text-2xl">350,000 套</strong>住宅，
+                            這將使城市現有住房存量增長 <strong class="text-red-500">55%</strong>。
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white rounded-xl p-4 text-center">
+                                <p class="kpi-medium text-red-500">70,000</p>
+                                <p class="text-secondary mt-1">套/年 計劃供應</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-4 text-center">
+                                <p class="kpi-medium text-meaven">36,000</p>
+                                <p class="text-secondary mt-1">套/年 長期均值</p>
+                            </div>
+                        </div>
+                        <p class="text-red-600 mt-4 font-medium">
+                            ⚠️ 計劃供應量近乎長期均值的 2 倍
+                        </p>
+                    </div>
+                    
+                    <div class="card mt-6">
+                        <h4 class="font-bold text-dark mb-4 text-lg">實際完成率分析（緩解因素）</h4>
+                        <p class="text-secondary mb-4">好消息是：開發商歷來無法按時交付所有項目</p>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-dark">2024 年實際完成率</span>
+                                    <span class="font-bold text-meaven text-lg">50%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-dark">2022-2024 年平均完成率</span>
+                                    <span class="font-bold text-teal text-lg">60%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 60%; background: linear-gradient(90deg, var(--teal), var(--meaven));"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側圖表 -->
+                <div>
+                    <div class="chart-box">
+                        <h4 class="font-bold text-dark mb-4 text-lg">杜拜住宅供應預測 (2022-2030)</h4>
+                        <div class="chart-container" id="supplyChart"></div>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <div class="insight-title">
+                            <i class="fas fa-lightbulb text-yellow-500"></i>
+                            <span>投資建議</span>
+                        </div>
+                        <div class="insight-content">
+                            <ul class="space-y-2">
+                                <li>✅ 選擇供應有限的成熟區域（如 Emirates Hills）</li>
+                                <li>✅ 優先考慮別墅（僅佔總供應 15.8%）</li>
+                                <li>⚠️ 避開供應過剩的新開發區如 JVC</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== PRIME MARKET SECTION ==================== -->
+    <section class="section-full gradient-bg" id="prime">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Prime Market</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">高端市場分析</h2>
+                <p class="text-secondary mt-3 text-lg">全球最繁忙的千萬美元級豪宅市場</p>
+            </div>
+            
+            <!-- 高端市場 KPI -->
+            <div class="grid md:grid-cols-4 gap-5 mb-12">
+                <div class="card text-center">
+                    <p class="text-meaven font-medium mb-2">高端住宅均價</p>
+                    <p class="kpi-medium text-dark">3,767</p>
+                    <p class="text-secondary">AED/sqft</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 113 萬/坪</span>
+                        <span class="cn-tag">RMB 8.1 萬/平</span>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <p class="text-teal font-medium mb-2">Q3 千萬美元+交易</p>
+                    <p class="kpi-medium text-dark">103 筆</p>
+                    <p class="text-meaven font-medium mt-2">+24% YoY</p>
+                </div>
+                <div class="card text-center">
+                    <p class="text-deepblue font-medium mb-2">UHNWI 購買意向</p>
+                    <p class="kpi-medium text-dark">103 億美元</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 3,180 億</span>
+                        <span class="cn-tag">RMB 756 億</span>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <p class="text-mustard font-medium mb-2">高端區域數量</p>
+                    <p class="kpi-medium text-dark">10 個</p>
+                    <p class="text-secondary">12 個月前僅 4 個</p>
+                </div>
+            </div>
+            
+            <!-- 全球比較 -->
+            <div class="grid lg:grid-cols-2 gap-10 items-center mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-dark mb-6">$100 萬美元能買多少空間？</h3>
+                    <div class="chart-box">
+                        <div class="chart-container" id="globalCompareChart" style="height: 380px;"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="card-highlight mb-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-2xl font-bold text-dark">杜拜 Dubai</p>
+                                <p class="text-secondary">全球性價比最高</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="kpi-medium text-meaven">954 sqft</p>
+                                <div class="mt-1">
+                                    <span class="tw-tag">26.8 坪</span>
+                                    <span class="cn-tag">88.6 平方米</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-secondary mt-4">同樣預算：倫敦/紐約 ≈ <strong>9 坪 / 30 平</strong>｜摩納哥 ≈ <strong>5 坪 / 19 平</strong></p>
+                    </div>
+                    
+                    <div class="insight-box">
+                        <div class="insight-title">
+                            <i class="fas fa-lightbulb text-yellow-500"></i>
+                            <span>富豪湧入杜拜原因</span>
+                        </div>
+                        <div class="insight-content">
+                            <ul class="space-y-2">
+                                <li>🏦 <strong>零所得稅</strong></li>
+                                <li>🌍 <strong>黃金簽證：</strong>200 萬 AED 投資獲 10 年居留</li>
+                                <li>✈️ <strong>地理位置：</strong>4 小時飛行圈覆蓋 40 億人口</li>
+                                <li>🔒 <strong>安全穩定</strong>｜🌞 <strong>全年陽光</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== RENTAL SECTION ==================== -->
+    <section class="section-full" id="rental">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Rental Market</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">租賃市場分析</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-6 mb-12">
+                <div class="card">
+                    <div class="icon-box mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold text-dark mb-2">全市平均租金</h3>
+                    <p class="kpi-medium text-meaven">7 萬</p>
+                    <p class="text-secondary">AED/年</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 59 萬/年</span>
+                        <span class="cn-tag">RMB 14 萬/年</span>
+                    </div>
+                    <p class="mt-3"><span class="text-meaven font-bold">+5.5%</span> YoY</p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-box mb-4" style="background: linear-gradient(135deg, var(--teal), var(--deepblue));"><i class="fas fa-building"></i></div>
+                    <h3 class="text-xl font-bold text-dark mb-2">公寓平均租金</h3>
+                    <p class="kpi-medium text-teal">6.5 萬</p>
+                    <p class="text-secondary">AED/年</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 54.7 萬/年</span>
+                        <span class="cn-tag">RMB 13 萬/年</span>
+                    </div>
+                    <p class="mt-3">毛收益率：<span class="font-bold text-meaven text-xl">7.40%</span></p>
+                </div>
+                
+                <div class="card">
+                    <div class="icon-box mb-4" style="background: linear-gradient(135deg, var(--deepblue), var(--mustard));"><i class="fas fa-house-chimney"></i></div>
+                    <h3 class="text-xl font-bold text-dark mb-2">別墅平均租金</h3>
+                    <p class="kpi-medium text-deepblue">19.3 萬</p>
+                    <p class="text-secondary">AED/年</p>
+                    <div class="mt-2">
+                        <span class="tw-tag">TWD 162.5 萬/年</span>
+                        <span class="cn-tag">RMB 38.6 萬/年</span>
+                    </div>
+                    <p class="mt-3">毛收益率：<span class="font-bold text-meaven text-xl">5.30%</span></p>
+                </div>
+            </div>
+            
+            <!-- 收益率比較 -->
+            <div class="insight-box mb-12">
+                <div class="insight-title">
+                    <i class="fas fa-percentage text-teal"></i>
+                    <span>收益率比較</span>
+                </div>
+                <div class="insight-content">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+                        <div class="text-center bg-white rounded-xl p-5">
+                            <p class="kpi-medium text-meaven">7.4%</p>
+                            <p class="text-secondary mt-1">杜拜公寓</p>
+                        </div>
+                        <div class="text-center bg-white rounded-xl p-5">
+                            <p class="kpi-medium text-gray-400">2-3%</p>
+                            <p class="text-secondary mt-1">台北市</p>
+                        </div>
+                        <div class="text-center bg-white rounded-xl p-5">
+                            <p class="kpi-medium text-gray-400">2.5%</p>
+                            <p class="text-secondary mt-1">香港</p>
+                        </div>
+                        <div class="text-center bg-white rounded-xl p-5">
+                            <p class="kpi-medium text-gray-400">3-4%</p>
+                            <p class="text-secondary mt-1">新加坡</p>
+                        </div>
+                    </div>
+                    <p class="mt-4">💡 杜拜收益率約為台北的 <strong class="text-meaven">2.5-3 倍</strong></p>
+                </div>
+            </div>
+            
+            <div class="chart-box">
+                <h4 class="font-bold text-dark mb-4 text-lg">租賃合約數量趨勢</h4>
+                <div class="chart-container" id="rentalChart" style="height: 350px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== OUTLOOK SECTION ==================== -->
+    <section class="section-full gradient-bg" id="outlook">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Risks &amp; Outlook</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">風險與 2026 展望</h2>
+                <p class="text-secondary mt-3 text-lg">市場風險評估與價格預測</p>
+            </div>
+            
+            <!-- 風險因素 -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-dark mb-6 text-center">
+                    <i class="fas fa-triangle-exclamation text-mustard mr-2"></i>主要風險因素
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="card">
+                        <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-building text-red-500 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-dark text-lg mb-2">住房供應過剩</h4>
+                        <p class="text-secondary">2030 年前計劃交付 35 萬套住宅，是歷史均值的近 2 倍。特定區域可能承壓。</p>
+                        <p class="mt-3"><span class="badge" style="background: rgba(220, 53, 69, 0.12); color: #dc3545;">風險等級：中高</span></p>
+                    </div>
+                    <div class="card">
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-house-crack text-yellow-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-dark text-lg mb-2">可負擔住房缺口</h4>
+                        <p class="text-secondary">90% 計劃供應定價超過 1,000 AED/sqft，中低收入住房嚴重不足。</p>
+                        <p class="mt-3"><span class="badge" style="background: rgba(255, 193, 7, 0.15); color: #B8860B;">風險等級：中</span></p>
+                    </div>
+                    <div class="card">
+                        <div class="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-globe text-orange-500 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-dark text-lg mb-2">全球經濟風險</h4>
+                        <p class="text-secondary">加密貨幣泡沫、AI 投資過熱、地緣政治緊張等因素可能衝擊全球資金流動。</p>
+                        <p class="mt-3"><span class="badge" style="background: rgba(255, 140, 0, 0.15); color: #FF8C00;">風險等級：中</span></p>
+                    </div>
+                    <div class="card">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-oil-can text-amber-600 text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-dark text-lg mb-2">油價波動</h4>
+                        <p class="text-secondary">雖然杜拜經濟已多元化，但區域整體仍依賴石油。油價大幅下跌可能影響區域信心。</p>
+                        <p class="mt-3"><span class="badge" style="background: rgba(218, 165, 32, 0.15); color: #DAA520;">風險等級：低中</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2026 展望 -->
+            <div class="card-highlight mb-12">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-dark">2026 年市場展望</h3>
+                    <p class="text-secondary text-lg">Knight Frank Consensus Forecast</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-center p-8 bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl">
+                        <p class="text-meaven font-semibold mb-3">主流住宅市場 Mainstream</p>
+                        <p class="kpi-hero">1%</p>
+                        <p class="text-xl text-dark font-medium mt-2">預計價格增長</p>
+                        <p class="text-secondary mt-2">增速放緩，進入盤整期</p>
+                    </div>
+                    <div class="text-center p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
+                        <p class="text-deepblue font-semibold mb-3">高端住宅市場 Prime</p>
+                        <p class="kpi-hero" style="background: linear-gradient(135deg, var(--deepblue), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">3%</p>
+                        <p class="text-xl text-dark font-medium mt-2">預計價格增長</p>
+                        <p class="text-secondary mt-2">持續受惠全球富豪遷移潮</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 市場週期指示器 -->
+            <div class="chart-box mb-8">
+                <h4 class="font-bold text-dark mb-4 text-lg text-center">
+                    市場週期指示器
+                    <span class="term-tip ml-2">
+                        Property Speedometer
+                        <span class="tip-icon"><i class="fas fa-question"></i></span>
+                        <span class="tip-content">
+                            <strong>市場週期指示器</strong><br><br>
+                            衡量房地產市場處於週期的哪個階段：<br>
+                            • <strong>修正期：</strong>價格下跌<br>
+                            • <strong>上升期：</strong>價格開始回升<br>
+                            • <strong>加速期：</strong>價格快速上漲<br>
+                            • <strong>峰值期：</strong>價格接近頂點
+                        </span>
+                    </span>
+                </h4>
+                <div class="chart-container" id="speedometerChart" style="height: 300px;"></div>
+                <p class="text-center text-meaven font-semibold mt-4 text-lg">
+                    <i class="fas fa-location-dot mr-2"></i>當前位置：<strong>上升市場後期</strong> - 增速放緩但仍為正增長
+                </p>
+            </div>
+            
+            <!-- 展望解讀 -->
+            <div class="insight-box">
+                <div class="insight-title">
+                    <i class="fas fa-crystal-ball text-purple-500"></i>
+                    <span>展望解讀與投資建議</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>對不同類型投資者的建議：</strong></p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-dark mb-2">🏠 自住買家</p>
+                            <p>2026 年預計增長僅 1%，急迫性降低。可以從容比較，不必擔心錯過時機。</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-dark mb-2">💰 收租投資者</p>
+                            <p>租金收益率仍具吸引力。建議選擇供應較少的成熟區域，避免 JVC 等高供應區。</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-dark mb-2">📈 資本增值投資者</p>
+                            <p>主流市場增值空間有限，高端市場（+3%）較有潛力。考慮新晉高端區如 La Mer。</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-dark mb-2">⏰ 時機考量</p>
+                            <p>經過 5 年連漲，市場進入成熟期。不建議追高，等待回調可能是更好的入場時機。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-6xl mx-auto"></div>
+
+    <!-- ==================== MARKET CYCLES ==================== -->
+    <section class="section-full" id="cycles">
+        <div class="section-container">
+            <div class="text-center mb-12">
+                <p class="text-meaven font-semibold tracking-widest mb-3 uppercase">Property Cycles</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">杜拜住宅市場週期</h2>
+                <p class="text-secondary mt-3 text-lg">從歷史週期看當前市場位置</p>
+            </div>
+            
+            <!-- 週期圖表 -->
+            <div class="chart-box mb-10">
+                <h4 class="font-bold text-dark mb-4 text-lg">杜拜住宅價格走勢與三個市場週期 (2003-2025)</h4>
+                <div class="chart-container" id="cycleChart"></div>
+            </div>
+            
+            <!-- 週期比較表 -->
+            <div class="overflow-x-auto rounded-xl shadow-lg mb-10">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>指標</th>
+                            <th>週期1: 淘金熱<br><span class="font-normal opacity-80">2002-2010</span></th>
+                            <th>週期2: 世博效應<br><span class="font-normal opacity-80">2011-2020</span></th>
+                            <th>週期3: 疫後復甦<br><span class="font-normal opacity-80">2020-至今</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">週期起始價格</td>
+                            <td>500 AED/sqft<br><span class="tw-tag">TWD 15萬/坪</span> <span class="cn-tag">RMB 1.1萬/平</span></td>
+                            <td>831 AED/sqft<br><span class="tw-tag">TWD 24.9萬/坪</span> <span class="cn-tag">RMB 1.8萬/平</span></td>
+                            <td>1,050 AED/sqft<br><span class="tw-tag">TWD 31.5萬/坪</span> <span class="cn-tag">RMB 2.3萬/平</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">週期最高價</td>
+                            <td>1,309 AED/sqft</td>
+                            <td>1,487 AED/sqft</td>
+                            <td>1,980 AED/sqft (進行中)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">持續時間</td>
+                            <td>8 年</td>
+                            <td>9.1 年</td>
+                            <td>5 年 (進行中)</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">週期漲幅</td>
+                            <td><span class="badge badge-up">+162%</span></td>
+                            <td><span class="badge badge-up">+79%</span></td>
+                            <td><span class="badge badge-up">+89% (至今)</span></td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">峰值後跌幅</td>
+                            <td><span class="badge badge-down">-63.3%</span></td>
+                            <td><span class="badge badge-down">-44.1%</span></td>
+                            <td>N/A</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">主要驅動力</td>
+                            <td>外資開放、投機熱潮</td>
+                            <td>世博會預期、油價反彈</td>
+                            <td>疫情移民、零稅吸引力</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 週期解讀 -->
+            <div class="insight-box">
+                <div class="insight-title">
+                    <i class="fas fa-history text-deepblue"></i>
+                    <span>歷史週期的啟示</span>
+                </div>
+                <div class="insight-content">
+                    <p><strong>從過去兩個週期學到的教訓：</strong></p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-red-500 mb-2">📉 週期1教訓</p>
+                            <p>投機過熱導致暴漲暴跌，跌幅高達 63%。當市場充斥短期炒家時要警惕。</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-5">
+                            <p class="font-bold text-orange-500 mb-2">📊 週期2教訓</p>
+                            <p>即使有世博會利好，過度供應仍導致價格回調 44%。供需基本面最重要。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-5 mt-4">
+                        <p class="font-bold text-meaven mb-2">🔍 當前週期特點</p>
+                        <ul class="space-y-1 mt-2">
+                            <li>• 投機比例大幅降低（4.5% vs 25%），市場更健康</li>
+                            <li>• 現金買家佔比高（86%），抗風險能力強</li>
+                            <li>• 經濟更多元化，減少對單一因素依賴</li>
+                        </ul>
+                    </div>
+                    <p class="mt-4 text-red-600">
+                        ⚠️ <strong>風險提醒：</strong>當前週期已持續 5 年，漲幅 89%，歷史上最長週期為 9 年。雖然基本面較好，但不宜過度樂觀。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="py-16 bg-gradient-to-b from-gray-50 to-white border-t border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-10 items-center">
+                <div class="text-center md:text-left">
+                    <p class="text-2xl font-bold text-meaven mb-2">Meaven Group</p>
+                    <p class="text-secondary">專業房地產投資諮詢服務</p>
+                    <p class="text-secondary">Your Trusted Partner in Dubai Real Estate</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-dark font-semibold text-lg mb-2">資料來源 Data Source</p>
+                    <p class="text-secondary">Knight Frank Research · REIDIN</p>
+                    <p class="text-secondary">Dubai Statistics Center · S&amp;P Global</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-dark font-semibold text-lg mb-2">聯繫我們 Contact</p>
+                    <a href="https://www.meaven.com" target="_blank" class="text-meaven hover:underline text-lg">www.meaven.com</a>
+                </div>
+            </div>
+            
+            <div class="divider my-8"></div>
+            
+            <!-- 換算參考 -->
+            <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-5 mb-8">
+                <p class="text-center text-dark">
+                    <strong>單位換算參考</strong>（僅供參考，實際匯率請以當日為準）<br><br>
+                    <span style="color: #FF6B35; font-weight: 600;">【台灣】</span> 
+                    匯率 1 AED ≈ 8.42 TWD ｜ 面積 35.58 sqft ≈ 1 坪<br>
+                    <span style="color: #FF6B35;">公式：萬TWD/坪 = AED/sqft × 8.42 × 35.58 ÷ 10,000</span><br><br>
+                    <span style="color: #E53935; font-weight: 600;">【大陸】</span> 
+                    匯率 1 AED ≈ 2.0 RMB ｜ 面積 10.76 sqft ≈ 1 平方米<br>
+                    <span style="color: #E53935;">公式：萬RMB/平 = AED/sqft × 2.0 × 10.76 ÷ 10,000</span>
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-secondary">© 2025 <span class="text-meaven font-semibold">Meaven Group</span>. All Rights Reserved.</p>
+                <p class="text-sm text-secondary mt-2">本報告內容基於 Knight Frank Q3 2025 杜拜住宅市場報告整理，僅供參考，不構成投資建議。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+    (function() {
+        var chartColors = {
+            meaven: '#009144',
+            teal: '#20C997',
+            deepblue: '#1A365D',
+            mustard: '#D4A574',
+            gray: '#666666',
+            lightGray: '#E5E5E5'
+        };
+
+        function initAllCharts() {
+            if (typeof echarts === 'undefined') {
+                setTimeout(initAllCharts, 500);
+                return;
+            }
+
+            // GDP Chart
+            var gdpDom = document.getElementById('gdpChart');
+            if (gdpDom) {
+                var gdpChart = echarts.init(gdpDom);
+                gdpChart.setOption({
+                    tooltip: { trigger: 'axis', formatter: '{b}年: {c}%' },
+                    grid: { left: '3%', right: '4%', bottom: '12%', top: '8%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2021', '2022', '2023', '2024'],
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        axisLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: { formatter: '{value}%', color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [{
+                        type: 'bar',
+                        data: [3.7, 3.6, 4.8, 4.5, 4.0, 3.1, 3.1, 2.0, 2.7, 5.7, 4.6, 3.3, 2.9],
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: chartColors.meaven },
+                                { offset: 1, color: chartColors.teal }
+                            ]),
+                            borderRadius: [6, 6, 0, 0]
+                        },
+                        barWidth: '55%'
+                    }]
+                });
+                window.addEventListener('resize', function() { gdpChart.resize(); });
+            }
+
+            // Price Chart
+            var priceDom = document.getElementById('priceChart');
+            if (priceDom) {
+                var priceChart = echarts.init(priceDom);
+                var years = [];
+                for (var i = 2003; i <= 2025; i++) years.push(i.toString());
+                priceChart.setOption({
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['所有住宅', '公寓', '別墅'], bottom: 0, textStyle: { fontSize: 13 } },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: years,
+                        axisLabel: { color: chartColors.gray, fontSize: 11, rotate: 45 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'AED/sqft',
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [
+                        {
+                            name: '所有住宅',
+                            type: 'line',
+                            smooth: true,
+                            data: [500, 600, 750, 950, 1100, 1309, 700, 481, 550, 650, 750, 900, 1100, 1200, 950, 900, 850, 831, 998, 1179, 1423, 1601, 1716, 1804, 1980],
+                            lineStyle: { width: 3, color: chartColors.gray },
+                            itemStyle: { color: chartColors.gray },
+                            areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: 'rgba(102, 102, 102, 0.2)' },
+                                { offset: 1, color: 'rgba(102, 102, 102, 0)' }
+                            ])}
+                        },
+                        {
+                            name: '公寓',
+                            type: 'line',
+                            smooth: true,
+                            data: [480, 570, 700, 900, 1050, 1250, 650, 450, 520, 620, 720, 870, 1050, 1150, 920, 870, 820, 800, 960, 1130, 1360, 1530, 1640, 1720, 1798],
+                            lineStyle: { width: 3, color: chartColors.teal },
+                            itemStyle: { color: chartColors.teal }
+                        },
+                        {
+                            name: '別墅',
+                            type: 'line',
+                            smooth: true,
+                            data: [550, 680, 850, 1050, 1200, 1450, 800, 550, 620, 720, 820, 980, 1200, 1300, 1000, 950, 900, 880, 1050, 1280, 1560, 1750, 1900, 2050, 2250],
+                            lineStyle: { width: 3, color: chartColors.deepblue },
+                            itemStyle: { color: chartColors.deepblue }
+                        }
+                    ]
+                });
+                window.addEventListener('resize', function() { priceChart.resize(); });
+            }
+
+            // Transaction Chart
+            var transDom = document.getElementById('transactionChart');
+            if (transDom) {
+                var transChart = echarts.init(transDom);
+                transChart.setOption({
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['交易量 (千筆)', '交易額 (AED Bn)'], bottom: 0, textStyle: { fontSize: 12 } },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025 Q1-Q3'],
+                        axisLabel: { color: chartColors.gray, fontSize: 11 }
+                    },
+                    yAxis: [
+                        { type: 'value', axisLabel: { color: chartColors.gray, fontSize: 12 }, splitLine: { lineStyle: { color: chartColors.lightGray } } },
+                        { type: 'value', position: 'right', axisLabel: { color: chartColors.gray, fontSize: 12 } }
+                    ],
+                    series: [
+                        {
+                            name: '交易量 (千筆)',
+                            type: 'bar',
+                            data: [40, 42, 35, 60, 90, 130, 169, 148],
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                    { offset: 0, color: chartColors.meaven },
+                                    { offset: 1, color: chartColors.teal }
+                                ]),
+                                borderRadius: [6, 6, 0, 0]
+                            }
+                        },
+                        {
+                            name: '交易額 (AED Bn)',
+                            type: 'line',
+                            yAxisIndex: 1,
+                            smooth: true,
+                            data: [70, 80, 65, 120, 200, 300, 367, 310],
+                            lineStyle: { width: 4, color: chartColors.deepblue },
+                            itemStyle: { color: chartColors.deepblue },
+                            symbol: 'circle',
+                            symbolSize: 10
+                        }
+                    ]
+                });
+                window.addEventListener('resize', function() { transChart.resize(); });
+            }
+
+            // Developer Chart
+            var devDom = document.getElementById('developerChart');
+            if (devDom) {
+                var devChart = echarts.init(devDom);
+                devChart.setOption({
+                    tooltip: { trigger: 'axis', formatter: '{b}: {c}%' },
+                    grid: { left: '3%', right: '4%', bottom: '20%', top: '10%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['Emaar', 'Damac', 'Sobha', 'Nakheel', 'Beyond', 'Danube', 'H&H', 'Meraas', 'Binghatti', 'Aldar'],
+                        axisLabel: { color: chartColors.gray, fontSize: 11, rotate: 30 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: { formatter: '{value}%', color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [{
+                        type: 'bar',
+                        data: [
+                            {value: 21.4, itemStyle: {color: chartColors.meaven}},
+                            {value: 12.1, itemStyle: {color: chartColors.teal}},
+                            {value: 6.4, itemStyle: {color: chartColors.deepblue}},
+                            {value: 5.6, itemStyle: {color: chartColors.mustard}},
+                            {value: 4.7, itemStyle: {color: chartColors.gray}},
+                            {value: 4.5, itemStyle: {color: chartColors.meaven}},
+                            {value: 3.1, itemStyle: {color: chartColors.teal}},
+                            {value: 2.5, itemStyle: {color: chartColors.deepblue}},
+                            {value: 1.9, itemStyle: {color: chartColors.mustard}},
+                            {value: 1.6, itemStyle: {color: chartColors.gray}}
+                        ],
+                        barWidth: '55%',
+                        label: { show: true, position: 'top', formatter: '{c}%', color: chartColors.gray, fontSize: 11 },
+                        itemStyle: { borderRadius: [6, 6, 0, 0] }
+                    }]
+                });
+                window.addEventListener('resize', function() { devChart.resize(); });
+            }
+
+            // Supply Chart
+            var supplyDom = document.getElementById('supplyChart');
+            if (supplyDom) {
+                var supplyChart = echarts.init(supplyDom);
+                supplyChart.setOption({
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['實際完成', '計劃供應'], bottom: 0, textStyle: { fontSize: 12 } },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['2022', '2023', '2024', '2025F', '2026F', '2027F', '2028F', '2029F', '2030F'],
+                        axisLabel: { color: chartColors.gray, fontSize: 12 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '住宅單位數',
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [
+                        {
+                            name: '實際完成',
+                            type: 'bar',
+                            data: [43000, 35000, 35000, 62000, null, null, null, null, null],
+                            itemStyle: { color: chartColors.meaven, borderRadius: [6, 6, 0, 0] }
+                        },
+                        {
+                            name: '計劃供應',
+                            type: 'bar',
+                            data: [null, null, null, null, 147000, 122000, 58000, 21000, 2000],
+                            itemStyle: { color: chartColors.mustard, borderRadius: [6, 6, 0, 0] }
+                        }
+                    ]
+                });
+                window.addEventListener('resize', function() { supplyChart.resize(); });
+            }
+
+            // Global Compare Chart
+            var globalDom = document.getElementById('globalCompareChart');
+            if (globalDom) {
+                var globalChart = echarts.init(globalDom);
+                globalChart.setOption({
+                    tooltip: { trigger: 'axis', formatter: '{b}: {c} sqft' },
+                    grid: { left: '3%', right: '18%', bottom: '3%', top: '3%', containLabel: true },
+                    xAxis: {
+                        type: 'value',
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: ['摩納哥', '香港', '新加坡', '倫敦', '紐約', '巴黎', '邁阿密', '東京', '杜拜'],
+                        axisLabel: { color: chartColors.gray, fontSize: 12 }
+                    },
+                    series: [{
+                        type: 'bar',
+                        data: [
+                            { value: 204, itemStyle: { color: chartColors.gray } },
+                            { value: 237, itemStyle: { color: chartColors.gray } },
+                            { value: 366, itemStyle: { color: chartColors.gray } },
+                            { value: 453, itemStyle: { color: chartColors.gray } },
+                            { value: 473, itemStyle: { color: chartColors.gray } },
+                            { value: 484, itemStyle: { color: chartColors.gray } },
+                            { value: 840, itemStyle: { color: chartColors.teal } },
+                            { value: 936, itemStyle: { color: chartColors.teal } },
+                            { value: 954, itemStyle: { color: chartColors.meaven } }
+                        ],
+                        barWidth: '60%',
+                        label: { show: true, position: 'right', formatter: '{c} sqft', color: chartColors.gray, fontSize: 11 },
+                        itemStyle: { borderRadius: [0, 6, 6, 0] }
+                    }]
+                });
+                window.addEventListener('resize', function() { globalChart.resize(); });
+            }
+
+            // Rental Chart
+            var rentalDom = document.getElementById('rentalChart');
+            if (rentalDom) {
+                var rentalChart = echarts.init(rentalDom);
+                rentalChart.setOption({
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['新租約', '續租'], bottom: 0, textStyle: { fontSize: 12 } },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: ['Q1 21', 'Q3 21', 'Q1 22', 'Q3 22', 'Q1 23', 'Q3 23', 'Q1 24', 'Q3 24', 'Q1 25', 'Q3 25'],
+                        axisLabel: { color: chartColors.gray, fontSize: 11 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '千筆',
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [
+                        {
+                            name: '新租約',
+                            type: 'bar',
+                            stack: 'total',
+                            data: [55, 65, 72, 78, 82, 88, 92, 98, 102, 108],
+                            itemStyle: { color: chartColors.meaven }
+                        },
+                        {
+                            name: '續租',
+                            type: 'bar',
+                            stack: 'total',
+                            data: [24, 28, 32, 36, 40, 44, 48, 52, 56, 60],
+                            itemStyle: { color: chartColors.teal, borderRadius: [6, 6, 0, 0] }
+                        }
+                    ]
+                });
+                window.addEventListener('resize', function() { rentalChart.resize(); });
+            }
+
+            // Speedometer Chart
+            var speedDom = document.getElementById('speedometerChart');
+            if (speedDom) {
+                var speedChart = echarts.init(speedDom);
+                speedChart.setOption({
+                    series: [{
+                        type: 'gauge',
+                        startAngle: 180,
+                        endAngle: 0,
+                        min: 0,
+                        max: 100,
+                        splitNumber: 4,
+                        axisLine: {
+                            lineStyle: {
+                                width: 25,
+                                color: [
+                                    [0.25, '#dc3545'],
+                                    [0.5, chartColors.mustard],
+                                    [0.75, chartColors.teal],
+                                    [1, chartColors.meaven]
+                                ]
+                            }
+                        },
+                        pointer: {
+                            length: '55%',
+                            width: 8,
+                            itemStyle: { color: chartColors.deepblue }
+                        },
+                        axisTick: { length: 10, lineStyle: { color: 'auto', width: 2 } },
+                        splitLine: { length: 15, lineStyle: { color: 'auto', width: 3 } },
+                        axisLabel: {
+                            color: chartColors.gray,
+                            fontSize: 13,
+                            distance: -50,
+                            formatter: function(value) {
+                                if (value === 12.5) return '修正';
+                                if (value === 37.5) return '上升';
+                                if (value === 62.5) return '加速';
+                                if (value === 87.5) return '峰值';
+                                return '';
+                            }
+                        },
+                        detail: {
+                            fontSize: 18,
+                            offsetCenter: [0, '65%'],
+                            formatter: '上升後期',
+                            color: chartColors.meaven
+                        },
+                        data: [{ value: 58 }]
+                    }]
+                });
+                window.addEventListener('resize', function() { speedChart.resize(); });
+            }
+
+            // Cycle Chart
+            var cycleDom = document.getElementById('cycleChart');
+            if (cycleDom) {
+                var cycleChart = echarts.init(cycleDom);
+                var cycleYears = [];
+                for (var j = 2003; j <= 2025; j++) cycleYears.push(j.toString());
+                cycleChart.setOption({
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['住宅均價', '高端住宅'], bottom: 0, textStyle: { fontSize: 13 } },
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '5%', containLabel: true },
+                    xAxis: {
+                        type: 'category',
+                        data: cycleYears,
+                        axisLabel: { color: chartColors.gray, fontSize: 11, rotate: 45 }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'AED/sqft',
+                        axisLabel: { color: chartColors.gray, fontSize: 12 },
+                        splitLine: { lineStyle: { color: chartColors.lightGray } }
+                    },
+                    series: [
+                        {
+                            name: '住宅均價',
+                            type: 'line',
+                            smooth: true,
+                            data: [500, 600, 750, 950, 1100, 1309, 700, 481, 550, 650, 750, 900, 1100, 1200, 950, 900, 850, 831, 998, 1179, 1423, 1601, 1716, 1804, 1980],
+                            lineStyle: { width: 4, color: chartColors.meaven },
+                            areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: 'rgba(0, 145, 68, 0.2)' },
+                                { offset: 1, color: 'rgba(0, 145, 68, 0)' }
+                            ])},
+                            markArea: {
+                                silent: true,
+                                data: [
+                                    [{ xAxis: '2003', itemStyle: { color: 'rgba(0, 145, 68, 0.06)' } }, { xAxis: '2010' }],
+                                    [{ xAxis: '2011', itemStyle: { color: 'rgba(32, 201, 151, 0.06)' } }, { xAxis: '2020' }],
+                                    [{ xAxis: '2020', itemStyle: { color: 'rgba(26, 54, 93, 0.06)' } }, { xAxis: '2025' }]
+                                ]
+                            }
+                        },
+                        {
+                            name: '高端住宅',
+                            type: 'line',
+                            smooth: true,
+                            data: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1570, 1570, 1800, 2200, 2800, 3200, 3500, 3700, 3767],
+                            lineStyle: { width: 4, color: chartColors.mustard },
+                            itemStyle: { color: chartColors.mustard }
+                        }
+                    ]
+                });
+                window.addEventListener('resize', function() { cycleChart.resize(); });
+            }
+        }
+
+        // Scroll Progress & Navigation
+        var scrollProgress = document.getElementById('scrollProgress');
+        var stickyNav = document.getElementById('stickyNav');
+        
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollPercent = (scrollTop / docHeight) * 100;
+            if (scrollProgress) scrollProgress.style.width = scrollPercent + '%';
+            
+            if (stickyNav) {
+                if (scrollTop > window.innerHeight * 0.8) {
+                    stickyNav.classList.add('visible');
+                } else {
+                    stickyNav.classList.remove('visible');
+                }
+            }
+        });
+
+        // Initialize charts
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAllCharts);
+        } else {
+            initAllCharts();
+        }
+    })();
+    </script>
+</body>
+</html>
